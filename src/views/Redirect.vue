@@ -19,7 +19,7 @@ export default {
 
       const webhookPayload = {
         email,
-        source: payload.source,
+        source: this.$route.params.source,
         info: payload.info,
       };
       await this.$http[payload.method.toLowerCase()](
@@ -27,7 +27,7 @@ export default {
         webhookPayload
       );
 
-      // window.location = redirectUrl;
+      window.location = payload.redirect;
     },
   },
 };

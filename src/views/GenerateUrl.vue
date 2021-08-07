@@ -33,12 +33,11 @@ export default {
         redirect: this.redirect,
         webhook: this.webhook,
         method: this.method,
-        source: this.source,
         info: this.info,
       };
       const encodedPayload = btoa(JSON.stringify(payload));
       console.log(window.location.pathname);
-      const url = `${window.location}r?p=${encodedPayload}`;
+      const url = `${window.location}${this.source}/r?p=${encodedPayload}`;
       this.url = url;
     },
   },
