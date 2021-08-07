@@ -25,11 +25,15 @@ export default {
       let url = payload.webhook;
       if (payload.method === "get") {
         const query = Object.keys(webhookPayload)
-          .map((x) => `${x}=${webhookPayload[x]}`)
+          .map((x) => `${x}=${encodeURI(webhookPayload[x])}`)
           .join("&");
         url = `${url}?${query}`;
       }
-      await this.$http[payload.method.toLowerCase()](url, webhookPayload);
+      try {
+        await this.$http[payload.method.toLowerCase()](url, webhookPayload);
+      } catch (err) {
+        console.log(err);
+      }
 
       window.location = payload.redirect;
     },
