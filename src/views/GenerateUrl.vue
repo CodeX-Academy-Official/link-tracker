@@ -20,8 +20,8 @@
 <script>
 export default {
   data: () => ({
-    redirect: "http://codex.academy",
-    webhook: "https://enyh8w2aolbhpay.m.pipedream.net",
+    redirect: "",
+    webhook: "",
     method: "post",
     source: "",
     info: "",
