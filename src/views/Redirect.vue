@@ -35,14 +35,14 @@ export default {
       }
       try {
         await this.$http[payload.method.toLowerCase()](
-          addProtocol(url),
+          this.addProtocol(url),
           webhookPayload
         );
       } catch (err) {
         console.log(err);
       }
 
-      window.location = addProtocol(payload.redirect);
+      window.location = this.addProtocol(payload.redirect);
     },
   },
 };
