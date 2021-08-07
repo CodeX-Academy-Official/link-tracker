@@ -10,6 +10,10 @@ export default {
     Identity,
   },
   methods: {
+    addProtocol(url) {
+      if (url.indexOf("http") === 0) return url;
+      return `https://${url}`;
+    },
     async redirect(email) {
       const payloadEncoded = this.$route.query.p;
       if (!payloadEncoded) return;
@@ -30,12 +34,15 @@ export default {
         url = `${url}?${query}`;
       }
       try {
-        await this.$http[payload.method.toLowerCase()](url, webhookPayload);
+        await this.$http[payload.method.toLowerCase()](
+          addProtocol(url),
+          webhookPayload
+        );
       } catch (err) {
         console.log(err);
       }
 
-      window.location = payload.redirect;
+      window.location = addProtocol(payload.redirect);
     },
   },
 };
