@@ -22,10 +22,14 @@ export default {
         source: this.$route.params.source,
         info: payload.info,
       };
-      await this.$http[payload.method.toLowerCase()](
-        payload.webhook,
-        webhookPayload
-      );
+      let url = payload.webhook;
+      if (payload.method === "get") {
+        const query = Object.keys(webhookPayload)
+          .map((x) => `${x}=${webhookPayload[x]}`)
+          .join("&");
+        url = `${url}?${query}`;
+      }
+      await this.$http[payload.method.toLowerCase()](url, webhookPayload);
 
       window.location = payload.redirect;
     },
